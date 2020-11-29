@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 import * as React from "react";
 
 export default function Home() {
@@ -12,14 +11,14 @@ export default function Home() {
         </Head>
         <main>
             <h1>Hubolhubolhubol</h1>
-            <ul className={styles.externalLinks}>
+            <ul id="externalLinks">
                 <li>itch.io</li>
                 <li>Bandcamp</li>
                 <li>YouTube</li>
                 <li>Gumm</li>
                 <li>Twitter</li>
             </ul>
-            <ul className={styles.portfolioItems}>
+            <ul id="portfolioItems">
                 <li/>
                 <li/>
                 <li/>
@@ -39,6 +38,38 @@ export default function Home() {
                 <li/>
             </ul>
         </main>
+        <style jsx>{`
+#externalLinks {
+    list-style: none;
+}
+
+#externalLinks li {
+    display: inline-block;
+    background-color: #B04030;
+    color: #F0F080;
+    font-weight: 500;
+    padding: .1em .2em;
+}
+
+#externalLinks li + li {
+    margin-left: 1em;
+}
+
+#portfolioItems {
+    margin: 1em 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 64px);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+
+#portfolioItems li {
+    width: 64px;
+    height: 64px;
+    background-color: #B04030;
+}`}</style>
     </>
     )
 }
