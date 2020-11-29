@@ -1,10 +1,18 @@
 import '../styles/normalize.css'
 import React from "react";
+import {HubolHeader} from "../components/hubolHeader";
+import Head from "next/head";
 
-function MyApp({ Component, pageProps }) {
-  return <>
-    <Component {...pageProps} />
-    <style jsx global>{`
+export default function MyApp({Component, pageProps}) {
+    return <>
+        <Head>
+            <link rel="icon" href="/favicon.ico"/>
+        </Head>
+        <header>
+            <HubolHeader/>
+        </header>
+        <Component {...pageProps} />
+        <style jsx global>{`
 * {
   padding: 0;
   margin: 0;
@@ -22,7 +30,5 @@ body {
   max-width: 800px;
   margin: 0 auto;
 }`}</style>
-  </>;
+    </>;
 }
-
-export default MyApp
