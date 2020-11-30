@@ -2,6 +2,7 @@ import Head from 'next/head'
 import * as React from "react";
 import {HubolHeader} from "../components/hubolHeader";
 import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
+import {GameDetails} from "../components/gameDetails";
 
 interface HomeProps {
     catalog: Game[]
@@ -17,14 +18,9 @@ export default function Home({catalog}: HomeProps) {
             <header>
                 <HubolHeader catalog={catalog}/>
             </header>
-            <main dangerouslySetInnerHTML={{__html: catalog[0].details}}>
-
+            <main>
+                <GameDetails game={catalog[0]}/>
             </main>
-            <style jsx global>{`
-main p {
-  font-size: 300%;
-}
-        `}</style>
         </>
     )
 }
