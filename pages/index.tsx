@@ -15,9 +15,7 @@ export default function Home({catalog}: HomeProps) {
                 <title>Hubolhubolhubol</title>
                 <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
             </Head>
-            <header>
-                <HubolHeader catalog={catalog}/>
-            </header>
+            <HubolHeader catalog={catalog}/>
             <main>
                 <GameDetails game={catalog[0]}/>
             </main>

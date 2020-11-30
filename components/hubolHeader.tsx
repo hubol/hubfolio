@@ -8,7 +8,7 @@ interface HubolHeaderProps
 
 export function HubolHeader({ catalog }: HubolHeaderProps) {
     return (
-        <>
+        <header>
             <h1>Hubolhubolhubol</h1>
             <nav>
                 <ul id="externalLinks">
@@ -57,6 +57,6 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
     height: 64px;
     background-color: #B04030;
 }`}</style>
-        </>
+        </header>
     )
 }
