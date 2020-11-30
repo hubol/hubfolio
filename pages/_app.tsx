@@ -1,6 +1,5 @@
 import '../styles/normalize.css'
 import React from "react";
-import {HubolHeader} from "../components/hubolHeader";
 import Head from "next/head";
 
 export default function MyApp({Component, pageProps}) {
@@ -8,9 +7,6 @@ export default function MyApp({Component, pageProps}) {
         <Head>
             <link rel="icon" href="/favicon.ico"/>
         </Head>
-        <header>
-            <HubolHeader/>
-        </header>
         <Component {...pageProps} />
         <style jsx global>{`
 * {

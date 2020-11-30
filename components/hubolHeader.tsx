@@ -1,6 +1,12 @@
 import * as React from "react";
+import {Game} from "../cms/getGamesCatalog";
 
-export function HubolHeader() {
+interface HubolHeaderProps
+{
+    catalog: Game[]
+}
+
+export function HubolHeader({ catalog }: HubolHeaderProps) {
     return (
         <>
             <h1>Hubolhubolhubol</h1>
@@ -15,23 +21,7 @@ export function HubolHeader() {
             </nav>
             <nav>
                 <ul id="portfolioItems">
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
-                    <li/>
+                    { catalog.map((x) => <li key={x.id}>{x.id}</li>) }
                 </ul>
             </nav>
         <style jsx>{`
