@@ -1,9 +1,14 @@
 import Head from 'next/head'
 import * as React from "react";
 import {HubolHeader} from "../components/hubolHeader";
-import {getGamesCatalog} from "../cms/getGamesCatalog";
+import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
 
-export default function Home({ catalog }) {
+interface HomeProps
+{
+    catalog: Game[]
+}
+
+export default function Home({ catalog }: HomeProps) {
     return (
     <>
         <Head>
@@ -13,6 +18,9 @@ export default function Home({ catalog }) {
         <header>
             <HubolHeader catalog={catalog}/>
         </header>
+        <main dangerouslySetInnerHTML={{ __html: catalog[0].details }}>
+
+        </main>
     </>
     )
 }

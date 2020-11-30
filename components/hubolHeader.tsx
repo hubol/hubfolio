@@ -21,7 +21,7 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
             </nav>
             <nav>
                 <ul id="portfolioItems">
-                    { catalog.map((x) => <li key={x.id}>{x.id}</li>) }
+                    { catalog.map((x) => <li key={x.id} />) }
                 </ul>
             </nav>
         <style jsx>{`
@@ -49,6 +49,7 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
     grid-column-gap: 10px;
     grid-row-gap: 10px;
     justify-content: center;
+    color: white;
 }
 
 #portfolioItems li {
