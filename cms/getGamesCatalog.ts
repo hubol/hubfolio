@@ -2,12 +2,13 @@ import path from "path";
 import {AsyncReturnType} from "../utils/asyncReturnType";
 import fs from "fs";
 import { JSDOM } from "jsdom";
+import {hubolDate, toDate} from "../utils/hubolDate";
 
 export async function getGamesCatalog()
 {
     const gamesCatalogDirectory = path.join(process.cwd(), "catalog");
     const paths = fs.readdirSync(gamesCatalogDirectory).map(x => path.join(gamesCatalogDirectory, x));
-    return await Promise.all(paths.map(readGame));
+    return (await Promise.all(paths.map(readGame))).sort(x => -toDate(x.releaseDate).getUTCDate());
 }
 
 export type Game = AsyncReturnType<typeof readGame>;
@@ -19,10 +20,37 @@ async function readGame(file: string)
     const document = new JSDOM().window.document;
     const html = document.createElement("html");
     html.innerHTML = text;
-    Array.from(html.getElementsByTagName("head")).forEach(x => x.remove());
+
+    const metadata = getMetadata(html);
 
     return {
         id,
-        detailsHtml: html.getElementsByTagName("body")[0].innerHTML
+        title: metadata["title"] as string,
+        collaborators: metadata["collaborators"] as string | undefined,
+        releaseDate: hubolDate(metadata["release-date"]),
+        detailsHtml: getBodyElement(html).innerHTML
     }
+}
+
+function getMetadata(html: HTMLHtmlElement)
+{
+    const result = {};
+    Array.from(html.getElementsByTagName("head"))
+        .flatMap(x => Array.from(x.children))
+        .forEach(x => {
+            const tagName = x.tagName.toLowerCase();
+            if (tagName === "meta")
+            {
+                const meta = x as HTMLMetaElement;
+                result[meta.name] = meta.content;
+            }
+            else
+                result[tagName] = x.textContent;
+        });
+    return result;
+}
+
+function getBodyElement(html: HTMLHtmlElement)
+{
+    return html.getElementsByTagName("body")[0];
 }
