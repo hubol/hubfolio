@@ -23,6 +23,6 @@ async function readGame(file: string)
 
     return {
         id,
-        details: html.getElementsByTagName("body")[0].innerHTML
+        detailsHtml: html.getElementsByTagName("body")[0].innerHTML
     }
 }
