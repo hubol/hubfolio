@@ -3,29 +3,32 @@ import * as React from "react";
 import {HubolHeader} from "../components/hubolHeader";
 import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
 
-interface HomeProps
-{
+interface HomeProps {
     catalog: Game[]
 }
 
-export default function Home({ catalog }: HomeProps) {
+export default function Home({catalog}: HomeProps) {
     return (
-    <>
-        <Head>
-            <title>Hubolhubolhubol</title>
-            <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon." />
-        </Head>
-        <header>
-            <HubolHeader catalog={catalog}/>
-        </header>
-        <main dangerouslySetInnerHTML={{ __html: catalog[0].details }}>
+        <>
+            <Head>
+                <title>Hubolhubolhubol</title>
+                <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
+            </Head>
+            <header>
+                <HubolHeader catalog={catalog}/>
+            </header>
+            <main dangerouslySetInnerHTML={{__html: catalog[0].details}}>
 
-        </main>
-    </>
+            </main>
+            <style jsx global>{`
+main p {
+  font-size: 300%;
+}
+        `}</style>
+        </>
     )
 }
 
-export async function getStaticProps()
-{
-    return { props: { catalog: await getGamesCatalog() } };
+export async function getStaticProps() {
+    return {props: {catalog: await getGamesCatalog()}};
 }

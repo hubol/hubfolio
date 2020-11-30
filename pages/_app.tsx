@@ -1,5 +1,4 @@
 import '../styles/normalize.css';
-import '../styles/home.css';
 import React from "react";
 import Head from "next/head";
 
