@@ -1,5 +1,6 @@
 import * as React from "react";
 import {Game} from "../cms/getGamesCatalog";
+import Link from "next/link";
 
 interface HubolHeaderProps
 {
@@ -21,7 +22,7 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
             </nav>
             <nav>
                 <ul id="portfolioItems">
-                    { catalog.map((x) => <li key={x.id} />) }
+                    { catalog.map((x) => <li key={x.id}><Link href={`/${x.id}`}>fu</Link></li>) }
                 </ul>
             </nav>
         <style jsx>{`
