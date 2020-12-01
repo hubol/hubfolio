@@ -3,13 +3,14 @@ import * as React from "react";
 import {HubolHeader} from "../components/hubolHeader";
 import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
 import {GameDetails} from "../components/gameDetails";
+import {HubolDate, toDate} from "../utils/hubolDate";
 
-interface ExplodedCatalogProps {
+interface GamePageProps {
     game: Game,
     catalog: Game[]
 }
 
-export default function ExplodedCatalog({ catalog, game }: ExplodedCatalogProps) {
+export default function GamePage({ catalog, game }: GamePageProps) {
     return (
         <>
             <Head>
@@ -17,15 +18,32 @@ export default function ExplodedCatalog({ catalog, game }: ExplodedCatalogProps)
                 <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
             </Head>
             <HubolHeader catalog={catalog} selectedGameId={game.id}/>
-            <main>
-                <GameDetails game={game}/>
-            </main>
-            <style jsx>{`
-main {
-  background-color: white;
-}`}</style>
+            <GameCard game={game} />
         </>
     )
+}
+
+const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+
+function ReleaseDate({ date }: { date: HubolDate })
+{
+    const realDate = toDate(date);
+    return <time dateTime={date.dateString}>{realDate.getDate()} {months[realDate.getMonth()]} {realDate.getFullYear()}</time>
+}
+
+function GameCard({ game }: { game: Game })
+{
+    return <main>
+        <h2>{game.title}</h2>
+        { game.collaborators && <address>w/ {game.collaborators}</address> }
+        <ReleaseDate date={game.releaseDate}/>
+        <GameDetails game={game}/>
+        <style jsx>{`
+main {
+  background-color: white;
+  padding: 1em;
+}`}</style>
+    </main>
 }
 
 export async function getStaticProps({ params }) {
