@@ -34,14 +34,28 @@ function ReleaseDate({ date }: { date: HubolDate })
 function GameCard({ game }: { game: Game })
 {
     return <main>
-        <h2>{game.title}</h2>
-        { game.collaborators && <address>w/ {game.collaborators}</address> }
+        <header>
+            <h2>{game.title}</h2>
+            { game.collaborators && <address>w/ {game.collaborators}</address> }
+        </header>
         <ReleaseDate date={game.releaseDate}/>
         <GameDetails game={game}/>
         <style jsx>{`
 main {
   background-color: white;
   padding: 1em;
+}
+
+header {
+  float: left;
+}
+
+:global(time) {
+  float: right;
+}
+
+:global(section) {
+  clear: both;
 }`}</style>
     </main>
 }
