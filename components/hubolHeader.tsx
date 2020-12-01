@@ -14,9 +14,17 @@ function GameCatalogItem({ game, isSelected }: { game: Game, isSelected: boolean
         <Link href={`/${game.id}`}>
             <a><img src={`/icons/${game.id}.png`} width="64" alt={`${game.title} icon`} /></a>
         </Link>
+            <style jsx>{`
+img:hover {
+  transform: translateY(-2px);
+}
+
+img:active {
+  transform: translateY(2px);
+}`}</style>
         <style jsx>{`
 img {
-  ${isSelected ? `box-shadow: 0 .2em .3em black;` : ``}
+  ${isSelected ? `box-shadow: 0 2px 4px black;` : ``}
 }`}</style>
         </>
     )
