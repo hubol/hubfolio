@@ -16,7 +16,7 @@ export default function ExplodedCatalog({ catalog, game }: ExplodedCatalogProps)
                 <title>{game.title}</title>
                 <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
             </Head>
-            <HubolHeader catalog={catalog}/>
+            <HubolHeader catalog={catalog} selectedGameId={game.id}/>
             <main>
                 <GameDetails game={game}/>
             </main>

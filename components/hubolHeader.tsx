@@ -2,12 +2,51 @@ import * as React from "react";
 import {Game} from "../cms/getGamesCatalog";
 import Link from "next/link";
 
-interface HubolHeaderProps
-{
-    catalog: Game[]
+interface HubolHeaderProps {
+    catalog: Game[];
+    selectedGameId?: string;
 }
 
-export function HubolHeader({ catalog }: HubolHeaderProps) {
+function GameCatalogItem({ game, isSelected }: { game: Game, isSelected: boolean })
+{
+    return (
+        <>
+        <Link href={`/${game.id}`}>
+            <a><img src={`/icons/${game.id}.png`} width="64" alt={`${game.title} icon`} /></a>
+        </Link>
+        <style jsx>{`
+img {
+  ${isSelected ? `box-shadow: 0 .2em .3em black;` : ``}
+}`}</style>
+        </>
+    )
+}
+
+function GameCatalog({ games, selectedGameId }: { games: Game[], selectedGameId?: string })
+{
+    return (
+        <>
+            <ul id="portfolioItems">
+                {games.map((x) => <li key={x.id}>
+                    <GameCatalogItem game={x} isSelected={x.id === selectedGameId}/>
+                </li>)}
+            </ul>
+            <style jsx>{`
+ul {
+    margin: 1em 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 64px);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    justify-content: center;
+}
+            `}</style>
+        </>
+    )
+}
+
+export function HubolHeader({catalog, selectedGameId}: HubolHeaderProps) {
     return (
         <header>
             <h1>Hubolhubolhubol</h1>
@@ -21,11 +60,9 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
                 </ul>
             </nav>
             <nav>
-                <ul id="portfolioItems">
-                    { catalog.map((x) => <li key={x.id}><Link href={`/${x.id}`}>fu</Link></li>) }
-                </ul>
+                <GameCatalog games={catalog} selectedGameId={selectedGameId} />
             </nav>
-        <style jsx>{`
+            <style jsx>{`
 #externalLinks {
     list-style: none;
 }
@@ -40,23 +77,6 @@ export function HubolHeader({ catalog }: HubolHeaderProps) {
 
 #externalLinks li + li {
     margin-left: 1em;
-}
-
-#portfolioItems {
-    margin: 1em 0;
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 64px);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-    justify-content: center;
-    color: white;
-}
-
-#portfolioItems li {
-    width: 64px;
-    height: 64px;
-    background-color: #B04030;
 }`}</style>
         </header>
     )

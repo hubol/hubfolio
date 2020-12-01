@@ -2,13 +2,13 @@ import path from "path";
 import {AsyncReturnType} from "../utils/asyncReturnType";
 import fs from "fs";
 import { JSDOM } from "jsdom";
-import {hubolDate} from "../utils/hubolDate";
+import {hubolDate, toDate} from "../utils/hubolDate";
 
 export async function getGamesCatalog()
 {
     const gamesCatalogDirectory = path.join(process.cwd(), "catalog");
     const paths = fs.readdirSync(gamesCatalogDirectory).map(x => path.join(gamesCatalogDirectory, x));
-    return await Promise.all(paths.map(readGame)); // TODO sort
+    return (await Promise.all(paths.map(readGame))).sort((a, b) => toDate(b.releaseDate) as any - (toDate(a.releaseDate) as any));
 }
 
 export type Game = AsyncReturnType<typeof readGame>;
