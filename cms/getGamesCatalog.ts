@@ -27,6 +27,7 @@ async function readGame(file: string)
         id,
         title: metadata["title"] as string,
         collaborators: (metadata["collaborators"] ?? null) as string | null,
+        description: metadata["description"] as string,
         releaseDate: hubolDate(metadata["release-date"]),
         detailsHtml: getBodyElement(html).innerHTML
     }

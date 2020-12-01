@@ -13,14 +13,23 @@ interface GamePageProps {
 export default function GamePage({ catalog, game }: GamePageProps) {
     return (
         <>
-            <Head>
-                <title>{game.title}</title>
-                <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
-            </Head>
+            <GameHead game={game} />
             <HubolHeader catalog={catalog} selectedGameId={game.id}/>
             <GameCard game={game} />
         </>
     )
+}
+
+export function GameHead({ game }: { game: Game })
+{
+    const title = `${game.title} by Hubol${game.collaborators ? ` and ${game.collaborators}`: ""}`
+
+    return <Head>
+        <title>{title}</title>
+        <meta name="og:title" content={title}/>
+        <meta name="description" content={game.description}/>
+        <meta name="og:description" content={game.description}/>
+    </Head>
 }
 
 const months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
