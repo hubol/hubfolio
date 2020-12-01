@@ -72,7 +72,7 @@ header {
 export async function getStaticProps({ params }) {
     const catalog = await getGamesCatalog();
     return {props: {
-        catalog,
+        catalog: catalog.map(x => ({ id: x.id, title: x.title })),
         game: catalog.find(x => x.id === params.id)
     }};
 }
