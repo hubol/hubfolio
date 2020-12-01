@@ -12,11 +12,35 @@ function GameCatalogItem({ game, isSelected }: { game: Game, isSelected: boolean
     return (
         <>
         <Link href={`/${game.id}`}>
-            <a><img src={`/icons/${game.id}.png`} width="64" alt={`${game.title} icon`} /></a>
+            <a>
+                <img src={`/icons/${game.id}.png`} width="64" alt={`${game.title} icon`} />
+                <p>{game.title}</p>
+            </a>
         </Link>
             <style jsx>{`
+a {
+  position: relative;
+}
+
+p {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  min-width: 96px;
+  background-color: orangered;
+  padding: .1em .2em;
+  box-sizing: border-box;
+}
+
 img:hover {
   transform: translateY(-2px);
+}
+
+img:hover + p {
+  display: inline-block;
 }
 
 img:active {
