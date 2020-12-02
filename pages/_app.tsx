@@ -6,6 +6,7 @@ export default function MyApp({Component, pageProps}) {
     return <>
         <Head>
             <link rel="icon" href="/favicon.ico"/>
+            <meta name="twitter:creator" content="@hubol" />
         </Head>
         <Component {...pageProps} />
         <style jsx global>{`
