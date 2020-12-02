@@ -4,6 +4,7 @@ import {HubolHeader} from "../components/hubolHeader";
 import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
 import {GameDetails} from "../components/gameDetails";
 import {HubolDate, toDate} from "../utils/hubolDate";
+import {GameScreenshots} from "../components/gameScreenshots";
 
 interface GamePageProps {
     game: Game,
@@ -43,11 +44,16 @@ function ReleaseDate({ date }: { date: HubolDate })
 function GameCard({ game }: { game: Game })
 {
     return <main>
-        <header>
-            <h2>{game.title}</h2>
-            { game.collaborators && <address>w/ {game.collaborators}</address> }
-        </header>
-        <ReleaseDate date={game.releaseDate}/>
+        <section>
+            <header>
+                <h2>{game.title}</h2>
+                { game.collaborators && <address>w/ {game.collaborators}</address> }
+            </header>
+            <ReleaseDate date={game.releaseDate}/>
+        </section>
+        <section>
+            <GameScreenshots />
+        </section>
         <GameDetails game={game}/>
         <style jsx>{`
 main {
@@ -63,8 +69,17 @@ header {
   float: right;
 }
 
-:global(section) {
+section:first-child::after {
+  display: block;
+  content: "";
   clear: both;
+  margin-bottom: .67em;
+}
+
+section:nth-child(2) {
+  clear: both;
+  float: left;
+  margin-right: 1em;
 }`}</style>
     </main>
 }
