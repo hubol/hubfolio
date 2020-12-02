@@ -29,6 +29,7 @@ export function GameHead({ game }: { game: Game })
         <meta name="description" content={game.description}/>
         <meta property="og:title" content={title}/>
         <meta property="og:description" content={game.description}/>
+        <meta name="twitter:creator" content="@hubol" />
     </Head>
 }
 
