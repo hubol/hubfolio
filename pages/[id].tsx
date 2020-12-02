@@ -26,9 +26,9 @@ export function GameHead({ game }: { game: Game })
 
     return <Head>
         <title>{title}</title>
-        <meta name="og:title" content={title}/>
         <meta name="description" content={game.description}/>
-        <meta name="og:description" content={game.description}/>
+        <meta property="og:title" content={title}/>
+        <meta property="og:description" content={game.description}/>
     </Head>
 }
 
