@@ -8,6 +8,10 @@ function Screenshot({ src, alt })
     return <Zoom zoomMargin={30}>
         <img src={src} alt={alt} />
         <style jsx>{`
+:global([data-rmiz-modal-content]) > img {
+  image-rendering: pixelated;
+}
+
 img {
   width: 100%;
 }
