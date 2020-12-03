@@ -81,6 +81,7 @@ section:nth-child(2) {
   clear: both;
   float: left;
   margin: 0 1em 0.67em 0;
+  width: 300px;
 }
 
 @media only screen and (max-width: 700px) {
