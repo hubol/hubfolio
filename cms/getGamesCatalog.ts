@@ -29,7 +29,8 @@ async function readGame(file: string)
         collaborators: (metadata["collaborators"] ?? null) as string | null,
         description: metadata["description"] as string,
         releaseDate: hubolDate(metadata["release-date"]),
-        detailsHtml: getBodyElement(html).innerHTML
+        detailsHtml: getBodyElement(html).innerHTML,
+        screenshots: getScreenshots(id)
     }
 }
 
@@ -54,4 +55,16 @@ function getMetadata(html: HTMLHtmlElement)
 function getBodyElement(html: HTMLHtmlElement)
 {
     return html.getElementsByTagName("body")[0];
+}
+
+function getScreenshots(gameId: string)
+{
+    const screenshotsDirectory = path.join(path.join(process.cwd(), "public"), "screenshots");
+    return fs.readdirSync(screenshotsDirectory)
+        .filter(x => {
+            const fileNameNoExtension = x.replace(/\..*$/, "");
+            return fileNameNoExtension.length === gameId.length + 2 && fileNameNoExtension.startsWith(gameId);
+        })
+        .sort()
+        .map(x => `screenshots/${x}`);
 }
