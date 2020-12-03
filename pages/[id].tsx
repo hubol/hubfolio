@@ -52,7 +52,7 @@ function GameCard({ game }: { game: Game })
             <ReleaseDate date={game.releaseDate}/>
         </section>
         <section>
-            <GameScreenshots />
+            <GameScreenshots game={game} />
         </section>
         <GameDetails game={game}/>
         <style jsx>{`

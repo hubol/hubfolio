@@ -1,6 +1,7 @@
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import React from "react";
+import {Game} from "../cms/getGamesCatalog";
 
 function Screenshot({ src, alt })
 {
@@ -17,14 +18,13 @@ img {
     </Zoom>;
 }
 
-export function GameScreenshots()
+export function GameScreenshots({ game } : { game: Game })
 {
     return <>
-        <Screenshot src={"screenshots/super-bogus-world-2-1.png"} alt={"Sasdasd"} />
-        <section>
-            <Screenshot src={"screenshots/super-bogus-world-2-2.png"} alt={"Sasdasd"} />
-            <Screenshot src={"screenshots/super-bogus-world-2-3.png"} alt={"Sasdasd"} />
-            <Screenshot src={"screenshots/super-bogus-world-2-4.png"} alt={"Sasdasd"} />
+        { game.screenshots.length > 0 &&  <Screenshot src={game.screenshots[0]} alt={`${game.title} Screenshot 1`} />}
+        { game.screenshots.length > 1 && <section>
+            { game.screenshots.slice(1)
+                .map((x, i) => <Screenshot key={x} src={x} alt={`${game.title} Screenshot ${i + 1}`}/>) }
             <style jsx>{`
 section {
   display: grid;
@@ -33,5 +33,6 @@ section {
   grid-row-gap: 5%;
 }`}</style>
         </section>
+        }
     </>
 }
