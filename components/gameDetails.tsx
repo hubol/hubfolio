@@ -6,12 +6,12 @@ export function GameDetails({ game }: {game: Game}) {
         <section dangerouslySetInnerHTML={{__html: game.detailsHtml}}/>
         <style jsx>{`
 section {
-    //flex-direction: column;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
     padding-top: 0.5em;
     text-align: center;
+}
+
+section > :global(*):last-child {
+  margin-bottom: 0;
 }
 
 :global(iframe) {
