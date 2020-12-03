@@ -59,6 +59,7 @@ function GameCard({ game }: { game: Game })
 main {
   background-color: white;
   padding: 1em;
+  margin-bottom: 1em;
 }
 
 header {
@@ -79,8 +80,18 @@ section:first-child::after {
 section:nth-child(2) {
   clear: both;
   float: left;
-  margin-right: 1em;
-}`}</style>
+  margin: 0 1em 0.67em 0;
+}
+
+@media only screen and (max-width: 700px) {
+  section:nth-child(2) {
+      float: none;
+      width: 300px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+}
+`}</style>
     </main>
 }
 
