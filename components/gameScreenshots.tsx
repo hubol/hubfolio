@@ -24,7 +24,7 @@ export function GameScreenshots({ game } : { game: Game })
         { game.screenshots.length > 0 &&  <Screenshot src={game.screenshots[0]} alt={`${game.title} Screenshot 1`} />}
         { game.screenshots.length > 1 && <section>
             { game.screenshots.slice(1)
-                .map((x, i) => <Screenshot key={x} src={x} alt={`${game.title} Screenshot ${i + 1}`}/>) }
+                .map((x, i) => <Screenshot key={x} src={x} alt={`${game.title} Screenshot ${i + 2}`}/>) }
             <style jsx>{`
 section {
   display: grid;
