@@ -85,7 +85,7 @@ figure:nth-child(2) {
 }
 
 @media only screen and (max-width: 700px) {
-  section:nth-child(2) {
+  figure:nth-child(2) {
       float: none;
       width: 300px;
       max-width: 100%;
