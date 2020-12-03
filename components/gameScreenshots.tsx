@@ -26,17 +26,17 @@ export function GameScreenshots({ game } : { game: Game })
 {
     return <>
         { game.screenshots.length > 0 &&  <Screenshot src={game.screenshots[0]} alt={`${game.title} Screenshot 1`} />}
-        { game.screenshots.length > 1 && <section>
+        { game.screenshots.length > 1 && <figure>
             { game.screenshots.slice(1)
                 .map((x, i) => <Screenshot key={x} src={x} alt={`${game.title} Screenshot ${i + 2}`}/>) }
             <style jsx>{`
-section {
+figure {
   display: grid;
   grid-template-columns: repeat(auto-fill, 32%);
   grid-column-gap: 2%;
   grid-row-gap: 5%;
 }`}</style>
-        </section>
+        </figure>
         }
     </>
 }

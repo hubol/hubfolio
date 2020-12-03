@@ -51,9 +51,9 @@ function GameCard({ game }: { game: Game })
             </header>
             <ReleaseDate date={game.releaseDate}/>
         </section>
-        <section>
+        <figure>
             <GameScreenshots game={game} />
-        </section>
+        </figure>
         <GameDetails game={game}/>
         <style jsx>{`
 main {
@@ -77,7 +77,7 @@ section:first-child::after {
   margin-bottom: .67em;
 }
 
-section:nth-child(2) {
+figure:nth-child(2) {
   clear: both;
   float: left;
   margin: 0 1em 0.67em 0;
