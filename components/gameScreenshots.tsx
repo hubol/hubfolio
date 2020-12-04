@@ -27,7 +27,6 @@ img {
 
 picture {
   background-color: #B04030;
-  overflow: hidden;
 }`}</style>
     </picture>
 }
