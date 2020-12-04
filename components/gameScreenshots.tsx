@@ -1,19 +1,44 @@
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-import React from "react";
+import React, {useState} from "react";
 import {Game} from "../cms/getGamesCatalog";
+import {useTimeoutFn} from "react-use";
+import {wait} from "pissant";
+
+function LazyImage({ src, alt })
+{
+    const [loaded, setLoaded] = useState(false);
+
+    useTimeoutFn(async () => {
+        const image = new Image();
+        image.src = src;
+        await wait(() => image.complete);
+        setLoaded(true);
+    });
+
+    return <picture>
+        <img src={src} alt={alt} />
+        <style jsx>{`
+img {
+  display: block;
+  width: 100%;
+  opacity: ${loaded ? "100%" : "0"};
+}
+
+picture {
+  background-color: #B04030;
+  overflow: hidden;
+}`}</style>
+    </picture>
+}
 
 function Screenshot({ src, alt })
 {
     return <Zoom zoomMargin={30}>
-        <img src={src} alt={alt} />
+        <LazyImage src={src} alt={alt} />
         <style jsx>{`
-:global([data-rmiz-modal-content]) > img {
+:global([data-rmiz-modal-content]) :global(img) {
   image-rendering: pixelated;
-}
-
-img {
-  width: 100%;
 }
 
 :global(button) {
