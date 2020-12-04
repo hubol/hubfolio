@@ -31,6 +31,7 @@ p {
   text-align: center;
   min-width: 96px;
   background-color: orangered;
+  color: green;
   padding: .1em .2em;
   box-sizing: border-box;
 }
