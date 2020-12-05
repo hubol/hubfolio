@@ -16,7 +16,9 @@ export default function GamePage({ catalog, game }: GamePageProps) {
         <>
             <GameHead game={game} />
             <HubolHeader catalog={catalog} selectedGameId={game.id}/>
-            <GameCard game={game} />
+            <main>
+                <GameCard game={game} />
+            </main>
         </>
     )
 }
@@ -43,27 +45,27 @@ function ReleaseDate({ date }: { date: HubolDate })
 
 function GameCard({ game }: { game: Game })
 {
-    return <main>
-        <section>
-            <header>
+    return <article>
+        <header>
+            <hgroup>
                 <h2>{game.title}</h2>
                 { game.collaborators && <address>w/ {game.collaborators}</address> }
-            </header>
+            </hgroup>
             <ReleaseDate date={game.releaseDate}/>
-        </section>
+        </header>
         <figure>
             <GameScreenshots game={game} />
         </figure>
         <GameDetails game={game}/>
         <style jsx>{`
-main {
+article {
   background-color: white;
   padding: 1em;
   margin-bottom: 1em;
   overflow: hidden;
 }
 
-header {
+hgroup {
   float: left;
 }
 
@@ -71,7 +73,7 @@ header {
   float: right;
 }
 
-section:first-child::after {
+header::after {
   display: block;
   content: "";
   clear: both;
@@ -93,7 +95,7 @@ figure {
     }
 }
 `}</style>
-    </main>
+    </article>
 }
 
 export async function getStaticProps({ params }) {
