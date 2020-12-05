@@ -60,6 +60,7 @@ main {
   background-color: white;
   padding: 1em;
   margin-bottom: 1em;
+  overflow: hidden;
 }
 
 header {
@@ -77,7 +78,7 @@ section:first-child::after {
   margin-bottom: .67em;
 }
 
-figure:nth-child(2) {
+figure {
   clear: both;
   float: left;
   margin: 0 1em 0.67em 0;
@@ -85,9 +86,8 @@ figure:nth-child(2) {
 }
 
 @media only screen and (max-width: 700px) {
-  figure:nth-child(2) {
+  figure {
       float: none;
-      width: 300px;
       max-width: 100%;
       margin: 0 auto;
     }
