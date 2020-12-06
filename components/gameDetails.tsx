@@ -1,9 +1,11 @@
 import React from "react";
 import {Game} from "../cms/getGamesCatalog";
+import {PlayOptions} from "./playOptions";
 
 export function GameDetails({ game }: {game: Game}) {
     return <>
         <section dangerouslySetInnerHTML={{__html: game.detailsHtml}}/>
+        <PlayOptions game={game} />
         <style jsx>{`
 section {
     padding-top: 0.5em;

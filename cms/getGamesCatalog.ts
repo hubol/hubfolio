@@ -30,7 +30,9 @@ async function readGame(file: string)
         description: metadata["description"] as string,
         releaseDate: hubolDate(metadata["release-date"]),
         detailsHtml: getBodyElement(html).innerHTML,
-        screenshots: getScreenshots(id)
+        screenshots: getScreenshots(id),
+        playBrowserUrl: (metadata["play:browser"] ?? null) as string | null,
+        playWindowsUrl: (metadata["play:win"] ?? null) as string | null
     }
 }
 
