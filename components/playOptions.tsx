@@ -3,10 +3,18 @@ import React from "react";
 
 export function PlayOptions({ game }: { game: Game })
 {
-    return <>
+    if (!game.playWindowsUrl && !game.playBrowserUrl)
+        return <></>
+    return <section>
         { game.playBrowserUrl && <PlayButton href={game.playBrowserUrl} flavor={"browser"} /> }
         { game.playWindowsUrl && <PlayButton href={game.playWindowsUrl} flavor={"windows"} /> }
-    </>
+        <style jsx>{`
+section {
+  width: 300px;
+  display: inline-block;
+}
+`}</style>
+    </section>
 }
 
 const flavors = {
@@ -25,12 +33,11 @@ a {
   text-decoration: none;
   display: block;
   color: white;
+  width: 100%;
   background-color: orangered;
   text-align: center;
-  padding: .1em 0;
-  width: 50%;
-  min-width: 300px;
-  margin: 0.5em auto;
+  padding: .1em .3em;
+  margin: 0.5em 0;
   clear: both;
 }
 

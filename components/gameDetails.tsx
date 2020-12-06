@@ -5,7 +5,9 @@ import {PlayOptions} from "./playOptions";
 export function GameDetails({ game }: {game: Game}) {
     return <>
         <section className={"mainDetails"} dangerouslySetInnerHTML={{__html: game.detailsHtml}}/>
-        <PlayOptions game={game} />
+        <section>
+            <PlayOptions game={game} />
+        </section>
         { game.afterPlayOptionsHtml && <section dangerouslySetInnerHTML={{__html: game.afterPlayOptionsHtml}}/> }
         <style jsx>{`
 .mainDetails {
