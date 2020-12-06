@@ -22,6 +22,7 @@ async function readGame(file: string)
     html.innerHTML = text;
 
     const metadata = getMetadata(html);
+    const details = getDetails(getBodyElement(html));
 
     return {
         id,
@@ -29,10 +30,10 @@ async function readGame(file: string)
         collaborators: (metadata["collaborators"] ?? null) as string | null,
         description: metadata["description"] as string,
         releaseDate: hubolDate(metadata["release-date"]),
-        detailsHtml: getBodyElement(html).innerHTML,
         screenshots: getScreenshots(id),
         playBrowserUrl: (metadata["play:browser"] ?? null) as string | null,
-        playWindowsUrl: (metadata["play:win"] ?? null) as string | null
+        playWindowsUrl: (metadata["play:win"] ?? null) as string | null,
+        ...details
     }
 }
 
@@ -57,6 +58,18 @@ function getMetadata(html: HTMLHtmlElement)
 function getBodyElement(html: HTMLHtmlElement)
 {
     return html.getElementsByTagName("body")[0];
+}
+
+function getDetails(body: HTMLBodyElement)
+{
+    const aside = body.getElementsByTagName("aside").item(0);
+    if (aside)
+        aside.remove();
+
+    return {
+        detailsHtml: body.innerHTML,
+        afterPlayOptionsHtml: aside?.innerHTML ?? null
+    }
 }
 
 function getScreenshots(gameId: string)

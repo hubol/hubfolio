@@ -6,6 +6,7 @@ export function GameDetails({ game }: {game: Game}) {
     return <>
         <section dangerouslySetInnerHTML={{__html: game.detailsHtml}}/>
         <PlayOptions game={game} />
+        { game.afterPlayOptionsHtml && <section dangerouslySetInnerHTML={{__html: game.afterPlayOptionsHtml}}/> }
         <style jsx>{`
 section {
     padding-top: 0.5em;

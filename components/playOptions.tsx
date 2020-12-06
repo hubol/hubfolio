@@ -31,6 +31,7 @@ a {
   width: 50%;
   min-width: 300px;
   margin: 0.5em auto;
+  clear: both;
 }
 
 a:hover {
