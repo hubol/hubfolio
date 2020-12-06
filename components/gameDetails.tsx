@@ -16,6 +16,10 @@ section {
   text-align: center;
 }
 
+section > :global(*):last-child {
+  margin-bottom: 0;
+}
+
 :global(iframe) {
   display: inline-block;
 }
