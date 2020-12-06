@@ -87,6 +87,10 @@ figure {
   width: 300px;
 }
 
+article > :global(*):last-child {
+  margin-bottom: 0;
+}
+
 @media only screen and (max-width: 700px) {
   figure {
       float: none;
