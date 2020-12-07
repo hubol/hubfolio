@@ -3,7 +3,7 @@ import * as React from "react";
 import {HubolHeader} from "../components/hubolHeader";
 import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
 import {GameDetails} from "../components/gameDetails";
-import {HubolDate, toDate} from "../utils/hubolDate";
+import {HubolDate} from "../utils/hubolDate";
 import {GameScreenshots} from "../components/gameScreenshots";
 
 interface GamePageProps {
@@ -39,8 +39,7 @@ const months = [ "January", "February", "March", "April", "May", "June", "July",
 
 function ReleaseDate({ date }: { date: HubolDate })
 {
-    const realDate = toDate(date);
-    return <time dateTime={date.dateString}>{realDate.getDate()} {months[realDate.getMonth()]} {realDate.getFullYear()}</time>
+    return <time dateTime={`${date.year}-${date.month}-${date.date}`}>{date.date} {months[date.month]} {date.year}</time>
 }
 
 function GameCard({ game }: { game: Game })
