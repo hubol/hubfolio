@@ -8,7 +8,9 @@ export async function getGamesCatalog()
 {
     const gamesCatalogDirectory = path.join(process.cwd(), "catalog");
     const paths = fs.readdirSync(gamesCatalogDirectory).map(x => path.join(gamesCatalogDirectory, x));
-    return (await Promise.all(paths.map(readGame))).sort((a, b) => toDate(b.releaseDate) as any - (toDate(a.releaseDate) as any));
+    return (await Promise.all(paths.map(readGame)))
+        .filter(x => !x.hidden)
+        .sort((a, b) => toDate(b.releaseDate) as any - (toDate(a.releaseDate) as any));
 }
 
 export type Game = AsyncReturnType<typeof readGame>;
@@ -33,6 +35,7 @@ async function readGame(file: string)
         screenshots: getScreenshots(id),
         playBrowserUrl: (metadata["play:browser"] ?? null) as string | null,
         playWindowsUrl: (metadata["play:win"] ?? null) as string | null,
+        hidden: !!metadata["hidden"],
         ...details
     }
 }
