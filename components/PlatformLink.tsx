@@ -22,10 +22,13 @@ a {
   text-decoration: none;
   padding: .2em 0;
   border-radius: 999px;
+  transition: all .2s;
 }
 
-a:hover, a:focus {
+a:hover {
   filter: saturate(0.8) brightness(1.2);
+  box-shadow: .1em .1em .3em rgba(153,190,71,0.72);
+  transform: translateY(-.1em);
 }
 
 a:active {
