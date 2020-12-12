@@ -1,5 +1,7 @@
 import * as React from "react";
 import {SeoHead} from "../components/SeoHead";
+import {PlatformLinks} from "../components/PlatformLinks";
+import {BioArticle} from "../components/BioArticle";
 
 export default function Home() {
     return (
@@ -13,12 +15,14 @@ export default function Home() {
             </header>
             <main>
                 <article>
-                    <h2>You wanna know the real me?</h2>
+                    <PlatformLinks />
                 </article>
+                <BioArticle />
             </main>
             <style jsx>{`
 h1 {
-  font-size: 13vw;
+  font-size: 12vw;
+  text-align: center;
   margin: 0;
 }`}</style>
         </>
