@@ -10,12 +10,19 @@ export function PlatformLinks()
         <style jsx>{`
 nav {
   width: 50vw;
-  max-width: 300px;
   margin: 0 auto;
 }
 
 nav :global(a) + :global(a) {
   margin-top: .4em;
+}
+
+@media only screen and (min-width: 800px) {
+  nav {
+    font-size: 2vw;
+    width: 37.5vw;
+    margin-left: 50vw;
+  }
 }`}</style>
     </nav>
 }

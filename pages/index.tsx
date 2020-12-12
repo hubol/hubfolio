@@ -1,7 +1,7 @@
 import * as React from "react";
 import {SeoHead} from "../components/SeoHead";
-import {PlatformLinks} from "../components/PlatformLinks";
 import {BioArticle} from "../components/BioArticle";
+import {TopArticle} from "../components/TopArticle";
 
 export default function Home() {
     return (
@@ -14,9 +14,7 @@ export default function Home() {
                 <h1>Hubolhubolhubol</h1>
             </header>
             <main>
-                <article>
-                    <PlatformLinks />
-                </article>
+                <TopArticle />
                 <BioArticle />
             </main>
             <style jsx>{`
