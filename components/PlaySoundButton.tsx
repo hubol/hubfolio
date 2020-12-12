@@ -1,8 +1,27 @@
-import React from "react";
+import React, {useRef} from "react";
+import {isPlaying} from "../utils/isPlaying";
 
 export function PlaySoundButton({ text, url })
 {
-    return <button>
+    const audioRef = useRef<HTMLAudioElement>();
+
+    async function togglePlayback()
+    {
+        const audio = audioRef.current;
+        if (!audio)
+            return;
+
+        if (isPlaying(audio))
+            audio.pause();
+        else
+        {
+            audio.currentTime = 0;
+            await audio.play();
+        }
+    }
+
+    return <button onClick={togglePlayback}>
+        <audio src={url} ref={audioRef}/>
         <img src={"speaker.png"} alt={"Speaker icon"} />
         <p>{text}</p>
         <style jsx>{`
@@ -32,6 +51,7 @@ p {
   transition: max-width 0.5s, padding 0.5s;
   overflow: hidden;
   transform: translate(-1em, .2875em);
+  white-space: nowrap;
   z-index: -1;
 }
 
