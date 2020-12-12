@@ -11,18 +11,20 @@ export default function MyApp({Component, pageProps}) {
 }
 
 html {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 
   background-color: #F0F080;
   color: #B04030;
-  /* https://stackoverflow.com/a/30293718 */
-  padding-left: calc(100vw - 100%);
 }
 
-body {
-  width: 90%;
-  max-width: 800px;
-  margin: 0 auto;
-}`}</style>
+h1, h2 {
+  font-weight: 700;
+}
+
+h3, h4, h5, strong {
+  font-weight: 500;
+}
+`}</style>
     </>;
 }
