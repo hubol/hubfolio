@@ -1,8 +1,15 @@
 import React, {useRef} from "react";
 import {isPlaying} from "../utils/isPlaying";
 
-export function PlaySoundButton({ text, url })
+const flavors = {
+    light: flavor("black", "white"),
+    dark: flavor("white", "#B04030")
+}
+
+export function PlaySoundButton({ text, url, flavor } : { text, url, flavor: keyof typeof flavors })
 {
+    const { backgroundColor, color } = flavors[flavor];
+
     const audioRef = useRef<HTMLAudioElement>();
 
     async function togglePlayback()
@@ -34,16 +41,18 @@ button {
 }
 
 img {
+  position: relative;
   image-rendering: pixelated;
   width: 2em;
+  z-index: 2;
 }
 
 p {
   position: absolute;
   font-weight: 500;
   display: inline-block;
-  background-color: white;
-  color: black;
+  background-color: ${backgroundColor};
+  color: ${color};
   border-radius: 0 999px 999px 0;
   width: auto;
   max-width: 0;
@@ -52,7 +61,7 @@ p {
   overflow: hidden;
   transform: translate(-1em, .2875em);
   white-space: nowrap;
-  z-index: -1;
+  z-index: 1;
 }
 
 button:hover p {
@@ -60,4 +69,9 @@ button:hover p {
   max-width: 300px;
 }`}</style>
     </button>
+}
+
+function flavor(color, backgroundColor)
+{
+    return { color, backgroundColor };
 }
