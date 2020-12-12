@@ -7,7 +7,10 @@ export function TopArticle()
         <PlatformLinks />
     <style jsx>{`
 article {
-  min-height: calc(100vh - 12vw);
+  min-height: calc(100vh - 8vw - 64px);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
 }`}</style>
     </article>
 }
