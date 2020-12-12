@@ -12,7 +12,7 @@ export default function Home() {
                 description={"Video games, music, and more by Hubol Persson-Gordon."}
                 imageUrl={""} />
             <header>
-                <h1>Hubolhubolhubol<PlaySoundButton text={"Pronounce"} url={""} flavor={"light"}/></h1>
+                <h1>Hubol<PlaySoundButton text={"Pronounce"} url={""} flavor={"light"}/></h1>
             </header>
             <main>
                 <TopArticle />
@@ -20,7 +20,7 @@ export default function Home() {
             </main>
             <style jsx>{`
 h1 {
-  font-size: 8vw;
+  font-size: 23vmin;
   text-align: center;
   margin: 0;
 }`}</style>
