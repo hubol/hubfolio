@@ -3,6 +3,7 @@ import {SeoHead} from "../components/SeoHead";
 import {BioArticle} from "../components/BioArticle";
 import {TopArticle} from "../components/TopArticle";
 import {HubolHeader} from "../components/HubolHeader";
+import {HubolFooter} from "../components/HubolFooter";
 
 export default function Home() {
     return (
@@ -16,9 +17,7 @@ export default function Home() {
                 <TopArticle />
                 <BioArticle />
             </main>
-            <footer>
-                <p>Hello</p>
-            </footer>
+            <HubolFooter />
         </>
     )
 }
