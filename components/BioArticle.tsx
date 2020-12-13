@@ -29,7 +29,7 @@ p + p {
 
 section {
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto .5em;
 }
 
 article {
@@ -45,6 +45,17 @@ article::before {
   height: 16px;
   position: relative;
   top: -16px;
+}
+
+article::after {
+  background-image: url("diamond-bottom.png");
+  background-repeat: round;
+  display: block;
+  content: "";
+  width: 100%;
+  height: 16px;
+  position: relative;
+  top: 16px;
 }`}</style>
     </article>
 }

@@ -18,6 +18,9 @@ export default function Home() {
                 <TopArticle />
                 <BioArticle />
             </main>
+            <footer>
+                <p>Hello</p>
+            </footer>
             <style jsx>{`
 h1 {
   font-size: 23vmin;
