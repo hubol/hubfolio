@@ -7,7 +7,7 @@ const flavors = {
     dark: flavor("white", "#B04030")
 }
 
-export function PlaySoundButton({ text, url, flavor } : { text, url, flavor: keyof typeof flavors })
+export function PlaySoundButton({ text, url, flavor, onPlay } : { text, url, flavor: keyof typeof flavors, onPlay?: (audio: HTMLAudioElement) => void })
 {
     const { backgroundColor, color } = flavors[flavor];
 
@@ -25,6 +25,8 @@ export function PlaySoundButton({ text, url, flavor } : { text, url, flavor: key
         {
             audio.currentTime = 0;
             await waitForMediaToLoad(audio);
+            if (onPlay)
+                onPlay(audio);
             await audio.play();
         }
     }
