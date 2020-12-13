@@ -1,5 +1,6 @@
 import React, {useRef} from "react";
 import {isPlaying} from "../utils/isPlaying";
+import {waitForMediaToLoad} from "../utils/waitForMediaToLoad";
 
 const flavors = {
     light: flavor("black", "white"),
@@ -23,6 +24,7 @@ export function PlaySoundButton({ text, url, flavor } : { text, url, flavor: key
         else
         {
             audio.currentTime = 0;
+            await waitForMediaToLoad(audio);
             await audio.play();
         }
     }
