@@ -12,7 +12,7 @@ export default function Home() {
                 description={"Video games, music, and more by Hubol Persson-Gordon."}
                 imageUrl={""} />
             <header>
-                <h1>Hubol<PlaySoundButton text={"Pronounce"} url={""} flavor={"light"}/></h1>
+                <h1>Hubol<PlaySoundButton text={"Pronounce"} url={"hubol-pronunciation.mp3"} flavor={"light"}/></h1>
             </header>
             <main>
                 <TopArticle />
