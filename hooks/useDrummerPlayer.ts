@@ -1,5 +1,6 @@
 import {wait} from "pissant";
 import {useEffect} from "react";
+import {viewport} from "../utils/viewport";
 
 async function createDrummerPlayer(token: { isCancelled: boolean })
 {
@@ -123,7 +124,7 @@ function makeDrummer(canvas: HTMLCanvasElement)
         xScale: 1,
         x: 0,
         y: 0,
-        dx: 0,
+        dx: 1,
         dy: 0,
         collides(dx: number, dy: number)
         {
@@ -135,7 +136,13 @@ function makeDrummer(canvas: HTMLCanvasElement)
 function doGameLogic(drummer: Drummer)
 {
     drummer.frame = (drummer.frame + 0.1) % 2;
-    drummer.x++;
+    drummer.x += drummer.dx;
+    if (drummer.x >= viewport.width - 64)
+        drummer.dx = Math.abs(drummer.dx) * -1;
+    else if (drummer.x < 0)
+        drummer.dx = Math.abs(drummer.dx);
+    if (drummer.dx !== 0)
+        drummer.xScale = Math.sign(drummer.dx);
     drummer.dy = Math.min(12, drummer.dy + 1);
     if (!drummer.collides(0, drummer.dy))
     {
