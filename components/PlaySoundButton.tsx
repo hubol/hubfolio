@@ -47,6 +47,14 @@ img {
   z-index: 2;
 }
 
+button:hover img {
+  transform: translateY(-0.1em) rotate(-1deg);
+}
+
+button:active img {
+  transform: translateY(0.1em) rotate(3deg);
+}
+
 p {
   position: absolute;
   font-weight: 500;
