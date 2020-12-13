@@ -1,11 +1,14 @@
 import '../styles/normalize.css';
 import React, {useEffect} from "react";
+import {useDrummerPlayer} from "../hooks/useDrummerPlayer";
 
 export default function MyApp({Component, pageProps}) {
     useEffect(() => {
         // https://css-tricks.com/snippets/css/remove-gray-highlight-when-tapping-links-in-mobile-safari/
         document.addEventListener("touchstart", function(){}, true);
     }, []);
+
+    useDrummerPlayer();
 
     return <>
         <Component {...pageProps} />
