@@ -2,7 +2,7 @@ import * as React from "react";
 import {SeoHead} from "../components/SeoHead";
 import {BioArticle} from "../components/BioArticle";
 import {TopArticle} from "../components/TopArticle";
-import {PlaySoundButton} from "../components/PlaySoundButton";
+import {HubolHeader} from "../components/HubolHeader";
 
 export default function Home() {
     return (
@@ -11,9 +11,7 @@ export default function Home() {
                 title={"Hubolhubolhubol"}
                 description={"Video games, music, and more by Hubol Persson-Gordon."}
                 imageUrl={""} />
-            <header>
-                <h1>Hubol<PlaySoundButton text={"Pronounce"} url={"hubol-pronunciation.mp3"} flavor={"light"}/></h1>
-            </header>
+            <HubolHeader />
             <main>
                 <TopArticle />
                 <BioArticle />
@@ -21,12 +19,6 @@ export default function Home() {
             <footer>
                 <p>Hello</p>
             </footer>
-            <style jsx>{`
-h1 {
-  font-size: 23vmin;
-  text-align: center;
-  margin: 0;
-}`}</style>
         </>
     )
 }
