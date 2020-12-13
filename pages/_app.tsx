@@ -1,13 +1,19 @@
 import '../styles/normalize.css';
-import React from "react";
+import React, {useEffect} from "react";
 
 export default function MyApp({Component, pageProps}) {
+    useEffect(() => {
+        // https://css-tricks.com/snippets/css/remove-gray-highlight-when-tapping-links-in-mobile-safari/
+        document.addEventListener("touchstart", function(){}, true);
+    }, []);
+
     return <>
         <Component {...pageProps} />
         <style jsx global>{`
 * {
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 html {
