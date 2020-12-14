@@ -88,11 +88,14 @@ type Drummer = ReturnType<typeof makeDrummer>;
 function collidesImpl(element: HTMLElement, dx: number, dy: number, target: DOMRect)
 {
     const box = element.getBoundingClientRect();
-    const x = box.x + dx;
+    const strip = element.scrollWidth * .25;
+    const x = box.x + dx + strip / 2;
     const y = box.y + dy;
+    const width = element.scrollWidth - strip;
+    const height = element.scrollHeight;
 
     return areRectanglesOverlapping(
-        { x, y, width: element.scrollWidth, height: element.scrollHeight },
+        { x, y, width, height },
         target);
 }
 
