@@ -1,28 +1,43 @@
 import {onViewportResize} from "./onViewportResize";
 
-function getDocumentElements(tagNames: string[])
+function getElementsOrNodes(element: Element)
 {
-    return tagNames.flatMap(x => Array.from(document.getElementsByTagName(x)));
+    switch (element.tagName)
+    {
+        case "P":
+        case "H1":
+        case "H2":
+            return getTextNodes(element);
+        case "A":
+        case "IMG":
+            return [ element ];
+        default:
+            return Array.from(element.childNodes);
+    }
 }
 
-function getNodes(element: Element)
+function getTextNodes(element: Element)
 {
-    return Array.from(element.childNodes);
+    return Array.from(element.childNodes).filter(x => x instanceof Text);
 }
 
-function createGetClientRect(node: Node)
+function createGetClientRect(nodeOrElement: Node | Element)
 {
+    if (nodeOrElement instanceof Element)
+    {
+        return () => [ nodeOrElement.getBoundingClientRect() ];
+    }
     const range = document.createRange();
-    range.selectNodeContents(node);
+    range.selectNodeContents(nodeOrElement);
 
     return () => range.getClientRects();
 }
 
-export function createGetClientRects(...tagNames: string[])
+export function createGetClientRects(selectors: string)
 {
-    const elements = getDocumentElements(tagNames);
+    const elements = Array.from(document.querySelectorAll(selectors));
 
-    const nodes = elements.flatMap(getNodes);
+    const nodes = elements.flatMap(getElementsOrNodes);
     const clientRectGetters = nodes.map(createGetClientRect);
 
     let dirty = true;

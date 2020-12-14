@@ -68,7 +68,7 @@ let cachedGetClientRects: ReturnType<typeof createGetClientRects>;
 function getClientRects()
 {
     if (!cachedGetClientRects)
-        cachedGetClientRects = createGetClientRects("p", "button", "a", "h2");
+        cachedGetClientRects = createGetClientRects("h2, h1, h2 ~ p, button img, a");
     return cachedGetClientRects();
 }
 
