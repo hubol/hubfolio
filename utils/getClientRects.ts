@@ -1,3 +1,5 @@
+import {onViewportResize} from "./onViewportResize";
+
 function getDocumentElements(tagNames: string[])
 {
     return tagNames.flatMap(x => Array.from(document.getElementsByTagName(x)));
@@ -23,8 +25,20 @@ export function createGetClientRects(...tagNames: string[])
     const nodes = elements.flatMap(getNodes);
     const clientRectGetters = nodes.map(createGetClientRect);
 
+    let dirty = true;
+
+    onViewportResize(() => dirty = true);
+    document.addEventListener('scroll', () => dirty = true);
+
+    let memoizedResult: DOMRect[];
+
     return function()
     {
-        return clientRectGetters.flatMap(x => Array.from(x()));
+        if (dirty)
+        {
+            memoizedResult = clientRectGetters.flatMap(x => Array.from(x()));
+            dirty = false;
+        }
+        return memoizedResult;
     }
 }
