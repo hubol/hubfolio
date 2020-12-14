@@ -1,24 +1,22 @@
-import Head from 'next/head'
 import * as React from "react";
-import {HubolHeader} from "../components/hubolHeader";
-import {Game, getGamesCatalog} from "../cms/getGamesCatalog";
+import {SeoHead} from "../components/SeoHead";
+import {BioArticle} from "../components/BioArticle";
+import {TopArticle} from "../components/TopArticle";
+import {HubolHeader} from "../components/HubolHeader";
+import {HubolFooter} from "../components/HubolFooter";
 
-interface HomeProps {
-    catalog: Game[]
-}
-
-export default function Home({catalog}: HomeProps) {
+export default function Home() {
     return (
         <>
-            <Head>
-                <title>Hubolhubolhubol</title>
-                <meta name="description" content="Video games, music, and more by Hubol Persson-Gordon."/>
-            </Head>
-            <HubolHeader catalog={catalog}/>
+            <SeoHead
+                title={"Hubolhubolhubol"}
+                description={"Video games, music, and more by Hubol Persson-Gordon."} />
+            <HubolHeader />
+            <main>
+                <TopArticle />
+                <BioArticle />
+            </main>
+            <HubolFooter />
         </>
     )
-}
-
-export async function getStaticProps() {
-    return {props: {catalog: await getGamesCatalog()}};
 }
