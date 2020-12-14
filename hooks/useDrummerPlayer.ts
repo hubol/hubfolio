@@ -21,7 +21,7 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
     canvas.style.width = `${width}vmin`;
     canvas.style.height = `${height}vmin`;
     canvas.style.cursor = "pointer";
-    canvas.style.zIndex = "1000";
+    canvas.style.zIndex = "50";
 
     const drawDrummerFrame = makeDrawDrummerFrame(image, canvas);
 
