@@ -9,7 +9,7 @@ footer {
   background-color: #1A2D9B;
   color: yellow;
   padding-top: 32px;
-  min-height: 3em;
+  min-height: 6em;
 }`}</style>
     </footer>
 }

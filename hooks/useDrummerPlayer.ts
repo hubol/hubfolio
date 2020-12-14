@@ -2,6 +2,7 @@ import {wait} from "pissant";
 import {useEffect} from "react";
 import {createGetClientRects} from "../utils/getClientRects";
 import {areRectanglesOverlapping} from "../utils/rectangle";
+import {viewport} from "../utils/viewport";
 
 async function createDrummerPlayer(token: { isCancelled: boolean })
 {
@@ -19,12 +20,21 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
     const height = width * (image.naturalHeight / canvas.width);
     canvas.style.width = `${width}vmin`;
     canvas.style.height = `${height}vmin`;
+    canvas.style.cursor = "pointer";
+    canvas.style.zIndex = "1000";
 
     const drawDrummerFrame = makeDrawDrummerFrame(image, canvas);
 
     document.body.appendChild(canvas);
 
     const drummer = makeDrummer(canvas);
+    canvas.onclick = () => {
+        if (drummer.dy === 0)
+        {
+            drummer.dy = -21.1;
+            drummer.dx *= -1;
+        }
+    }
 
     function doGameLoop()
     {
@@ -103,8 +113,8 @@ function makeDrummer(canvas: HTMLCanvasElement)
     return {
         frame: 0,
         xScale: 1,
-        x: 900,
-        y: 0,
+        x: viewport.width / 2,
+        y: 9999999999,
         dx: 1,
         dy: 0,
         get width() {
@@ -134,18 +144,30 @@ function doGameLogic(drummer: Drummer)
     if (drummer.dx !== 0)
         drummer.xScale = Math.sign(drummer.dx);
     drummer.dy = Math.min(12, drummer.dy + 1);
-    if (!drummer.collides(0, drummer.dy) && drummer.y < document.body.clientHeight)
+    if (drummer.dy > 0)
     {
-        drummer.frame = 3;
-        drummer.y += drummer.dy;
+        for (let i = 0; i < Math.floor(drummer.dy); i++)
+        {
+            if (drummer.collides(0, 1) || drummer.y >= document.body.clientHeight)
+            {
+                drummer.dy = 0;
+                drummer.y = Math.min(drummer.y, document.body.clientHeight);
+                break;
+            }
+
+            drummer.y++;
+            drummer.frame = 3;
+        }
     }
     else
     {
-        drummer.dy = 0;
-        drummer.y = Math.min(drummer.y, document.body.clientHeight);
+        drummer.y += drummer.dy;
     }
 
     drummer.x = Math.min(xMax, Math.max(xMin, drummer.x));
+
+    if (drummer.dy < 0)
+        drummer.frame = 2;
 }
 
 export function useDrummerPlayer()
