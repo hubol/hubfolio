@@ -53,8 +53,6 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
             return;
 
         doGameLogic(drummer);
-        canvas.style.left = `${drummer.x - drummer.width / 2}px`;
-        canvas.style.top = `${drummer.y - drummer.height}px`;
         canvas.style.transform = `scaleX(${drummer.xScale})`;
         drawDrummerFrame(drummer.frame);
     }
@@ -123,15 +121,30 @@ function collides(element: HTMLElement, dx: number, dy: number)
 
 function makeDrummer(canvas: HTMLCanvasElement)
 {
-    return {
+    let x = viewport.width / 2;
+    let y = 9999999999;
+
+    const drummer = {
         frame: 0,
         xScale: 1,
-        x: viewport.width / 2,
-        y: 9999999999,
+        get x() {
+          return x;
+        },
+        get y() {
+            return y;
+        },
+        set x(value) {
+            x = value;
+            updateCanvasPosition();
+        },
+        set y(value) {
+            y = value;
+            updateCanvasPosition();
+        },
         dx: 1,
         dy: 0,
         get width() {
-          return canvas.scrollWidth;
+            return canvas.scrollWidth;
         },
         get height() {
             return canvas.scrollHeight;
@@ -140,7 +153,15 @@ function makeDrummer(canvas: HTMLCanvasElement)
         {
             return collides(canvas, dx, dy);
         }
+    };
+
+    function updateCanvasPosition()
+    {
+        canvas.style.left = `${drummer.x - drummer.width / 2}px`;
+        canvas.style.top = `${drummer.y - drummer.height}px`;
     }
+
+    return drummer;
 }
 
 function doGameLogic(drummer: Drummer)
