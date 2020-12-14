@@ -22,7 +22,8 @@ a {
   text-decoration: none;
   padding: .2em 0;
   border-radius: 999px;
-  transition: all .2s;
+  transition: filter .2s, box-shadow .2s, transform .2s;
+  cursor: pointer;
 }
 
 a:hover {
