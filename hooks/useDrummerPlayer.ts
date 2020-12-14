@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {createGetClientRects} from "../utils/getClientRects";
 import {areRectanglesOverlapping} from "../utils/rectangle";
 import {viewport} from "../utils/viewport";
+import {now} from "../utils/now";
 
 async function createDrummerPlayer(token: { isCancelled: boolean })
 {
@@ -34,7 +35,9 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
             drummer.dy = -21.1;
             drummer.dx *= -1;
         }
-    }
+    };
+
+    let lastLogicTime = 0;
 
     function doGameLoop()
     {
@@ -42,6 +45,13 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
             return;
 
         requestAnimationFrame(doGameLoop);
+
+        const currentTime = now.ms;
+        if (currentTime - lastLogicTime > 14)
+            lastLogicTime = currentTime;
+        else
+            return;
+
         doGameLogic(drummer);
         canvas.style.left = `${drummer.x - drummer.width / 2}px`;
         canvas.style.top = `${drummer.y - drummer.height}px`;

@@ -5,7 +5,7 @@ export const now = {
     },
     get ms()
     {
-        return new Date().getTime();
+        return performance.now();
     },
     get s()
     {
