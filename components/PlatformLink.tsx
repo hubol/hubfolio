@@ -1,7 +1,7 @@
 import React from "react";
 
 const flavors = {
-    youtube: flavor("Videos", "https://www.youtube.com/c/HubolPerssonGordon", "#ff0000"),
+    youtube: flavor("Videos", "https://www.youtube.com/c/HubolPerssonGordon/videos", "#ff0000"),
     itch: flavor("Games", "https://hubol.itch.io/", "#FA5C5C"),
     bandcamp: flavor("Music", "https://hubol.bandcamp.com/", "#1DA0C3"),
 };
@@ -9,7 +9,7 @@ const flavors = {
 export function PlatformLink({ flavor }: { flavor: keyof typeof flavors})
 {
     const { backgroundColor, text, color, url } = flavors[flavor];
-    return <a href={url}>{text}
+    return <a href={url} target={"_blank"}>{text}
         <style jsx>{`
 a {
   font-size: 200%;
