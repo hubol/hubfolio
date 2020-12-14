@@ -12,7 +12,7 @@ export function HubolHeader()
     }
 
     return <header>
-        <h1>Hubol<PlaySoundButton text={"Pronounce"} url={"hubol-pronunciation.mp3"} flavor={"light"} onPlay={doAnimatePronunciation}/></h1>
+        <h1>Hubol<PlaySoundButton text={"Pronounce"} url={"static/hubol-pronunciation.mp3"} flavor={"light"} onPlay={doAnimatePronunciation}/></h1>
         { progress > 0 && <PronunciationGuide progress={progress} /> }
         <style jsx>{`
 h1 {

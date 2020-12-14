@@ -33,7 +33,7 @@ export function PlaySoundButton({ text, url, flavor, onPlay } : { text, url, fla
 
     return <button onClick={togglePlayback}>
         <audio src={url} ref={audioRef}/>
-        <img src={"speaker.png"} alt={"Speaker icon"} />
+        <img src={"static/speaker.png"} alt={"Speaker icon"} />
         <p>{text}</p>
         <style jsx>{`
 button {

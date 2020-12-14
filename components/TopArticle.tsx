@@ -4,7 +4,7 @@ import * as React from "react";
 export function TopArticle()
 {
     return <article>
-        <img src={"drummer.svg"} alt={"The Drummer"} />
+        <img src={"static/drummer.svg"} alt={"The Drummer"} />
         <section>
             <PlatformLinks />
         </section>

@@ -10,7 +10,7 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
 {
     const frameCount = 4;
     const image = new Image();
-    image.src = "drummer-player.png";
+    image.src = "static/drummer-player.png";
     await wait(() => image.complete);
 
     const canvas = document.createElement("canvas");
