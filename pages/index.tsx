@@ -10,8 +10,7 @@ export default function Home() {
         <>
             <SeoHead
                 title={"Hubolhubolhubol"}
-                description={"Video games, music, and more by Hubol Persson-Gordon."}
-                imageUrl={""} />
+                description={"Video games, music, and more by Hubol Persson-Gordon."} />
             <HubolHeader />
             <main>
                 <TopArticle />
