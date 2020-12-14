@@ -29,13 +29,7 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
     document.body.appendChild(canvas);
 
     const drummer = makeDrummer(canvas);
-    canvas.onclick = () => {
-        if (drummer.dy === 0)
-        {
-            drummer.dy = -21.1;
-            drummer.dx *= -1;
-        }
-    };
+    enrichDrummerPointerBehavior(drummer);
 
     let lastLogicTime = 0;
 
@@ -63,6 +57,50 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
        await wait(() => token.isCancelled);
        canvas.remove();
     });
+}
+
+function enrichDrummerPointerBehavior(drummer: Drummer)
+{
+    if (window.matchMedia("(any-hover: none)").matches)
+    {
+        drummer.canvas.onclick = () => drummer.jump();
+        return;
+    }
+
+    let pointerMotion = 0;
+    let cleanup = () => { };
+
+    function onPointerMoved(e: PointerEvent)
+    {
+        if (pointerMotion < 3)
+            pointerMotion += Math.abs(e.movementX) + Math.abs(e.movementY);
+        else
+        {
+            drummer.isBeingDragged = true;
+            drummer.x = e.pageX;
+            drummer.y = e.pageY + drummer.height * .75;
+        }
+    }
+
+    function onPointerUp()
+    {
+        if (drummer.isBeingDragged)
+            drummer.isBeingDragged = false;
+        else
+            drummer.jump();
+        cleanup();
+    }
+
+    drummer.canvas.onpointerdown = e => {
+        e.preventDefault();
+        pointerMotion = 0;
+        document.addEventListener("pointermove", onPointerMoved);
+        document.addEventListener("pointerup", onPointerUp);
+        cleanup = () => {
+            document.removeEventListener("pointermove", onPointerMoved);
+            document.removeEventListener("pointerup", onPointerUp);
+        };
+    };
 }
 
 function makeDrawDrummerFrame(image: HTMLImageElement, canvas: HTMLCanvasElement)
@@ -125,6 +163,7 @@ function makeDrummer(canvas: HTMLCanvasElement)
     let y = 9999999999;
 
     const drummer = {
+        isBeingDragged: false,
         frame: 0,
         xScale: 1,
         get x() {
@@ -132,6 +171,13 @@ function makeDrummer(canvas: HTMLCanvasElement)
         },
         get y() {
             return y;
+        },
+        jump() {
+            if (this.dy === 0)
+            {
+                this.dy = -21.1;
+                this.dx *= -1;
+            }
         },
         set x(value) {
             x = value;
@@ -152,7 +198,8 @@ function makeDrummer(canvas: HTMLCanvasElement)
         collides(dx: number, dy: number)
         {
             return collides(canvas, dx, dy);
-        }
+        },
+        canvas
     };
 
     function updateCanvasPosition()
@@ -166,6 +213,9 @@ function makeDrummer(canvas: HTMLCanvasElement)
 
 function doGameLogic(drummer: Drummer)
 {
+    if (drummer.isBeingDragged)
+        return;
+
     const xMax = document.body.clientWidth - drummer.width / 2;
     const xMin = drummer.width / 2;
 
