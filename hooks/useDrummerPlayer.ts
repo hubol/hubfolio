@@ -4,6 +4,7 @@ import {createGetClientRects} from "../utils/getClientRects";
 import {areRectanglesOverlapping} from "../utils/rectangle";
 import {viewport} from "../utils/viewport";
 import {now} from "../utils/now";
+import {device} from "../utils/device";
 
 async function createDrummerPlayer(token: { isCancelled: boolean })
 {
@@ -61,7 +62,7 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
 
 function enrichDrummerPointerBehavior(drummer: Drummer)
 {
-    if (window.matchMedia("(any-hover: none)").matches)
+    if (device.atLeastOneInputDeviceDoesNotSupportHovering)
     {
         drummer.canvas.onclick = () => drummer.jump();
         return;
