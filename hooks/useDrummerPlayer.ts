@@ -1,6 +1,8 @@
 import {wait} from "pissant";
 import {useEffect} from "react";
 import {viewport} from "../utils/viewport";
+import {createGetClientRects} from "../utils/getClientRects";
+import {areRectanglesOverlapping} from "../utils/rectangle";
 
 async function createDrummerPlayer(token: { isCancelled: boolean })
 {
@@ -61,56 +63,34 @@ function makeDrawDrummerFrame(image: HTMLImageElement, canvas: HTMLCanvasElement
     }
 }
 
-let cachedDocumentNodes;
+let cachedGetClientRects: ReturnType<typeof createGetClientRects>;
 
-function getDocumentNodes()
+function getClientRects()
 {
-    if (!cachedDocumentNodes)
-        cachedDocumentNodes = getDocumentNodes2("p", "button", "a", "h2");
-    return cachedDocumentNodes;
-}
-
-function getDocumentNodes2(...tagNames): Element[]
-{
-    return tagNames.flatMap(x => Array.from(document.getElementsByTagName(x)));
+    if (!cachedGetClientRects)
+        cachedGetClientRects = createGetClientRects("p", "button", "a", "h2");
+    return cachedGetClientRects();
 }
 
 type Drummer = ReturnType<typeof makeDrummer>;
 
-function collidesImpl(element: HTMLElement, dx: number, dy: number, target: HTMLElement)
+function collidesImpl(element: HTMLElement, dx: number, dy: number, target: DOMRect)
 {
     const box = element.getBoundingClientRect();
-    const targetBox = target.getBoundingClientRect();
     const x = box.x + dx;
     const y = box.y + dy;
 
     return areRectanglesOverlapping(
         { x, y, width: element.scrollWidth, height: element.scrollHeight },
-        { x: targetBox.x, y: targetBox.y, width: target.scrollWidth, height: target.scrollHeight });
-}
-
-export interface Rectangle
-{
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
-
-export function areRectanglesOverlapping(a: Rectangle, b: Rectangle)
-{
-    return a.x + a.width > b.x
-        && a.x < b.x + b.width
-        && a.y + a.height > b.y
-        && a.y < b.y + b.height;
+        target);
 }
 
 function collides(element: HTMLElement, dx: number, dy: number)
 {
-    const elements = getDocumentNodes();
+    const elements = getClientRects();
     for (let i = 0; i < elements.length; i++)
     {
-        if (element !== elements[i] && collidesImpl(element, dx, dy, elements[i]))
+        if (collidesImpl(element, dx, dy, elements[i]))
             return true;
     }
 
@@ -122,7 +102,7 @@ function makeDrummer(canvas: HTMLCanvasElement)
     return {
         frame: 0,
         xScale: 1,
-        x: 0,
+        x: 900,
         y: 0,
         dx: 1,
         dy: 0,
