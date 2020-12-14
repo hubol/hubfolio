@@ -22,7 +22,6 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
     const height = width * (image.naturalHeight / canvas.width);
     canvas.style.width = `${width}vmin`;
     canvas.style.height = `${height}vmin`;
-    canvas.style.cursor = "pointer";
     canvas.style.zIndex = "50";
 
     const drawDrummerFrame = makeDrawDrummerFrame(image, canvas);
@@ -49,6 +48,7 @@ async function createDrummerPlayer(token: { isCancelled: boolean })
 
         doGameLogic(drummer);
         canvas.style.transform = `scaleX(${drummer.xScale})`;
+        canvas.style.cursor = drummer.isBeingDragged ? "grabbing" : "pointer";
         drawDrummerFrame(drummer.frame);
     }
 
