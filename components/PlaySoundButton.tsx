@@ -34,7 +34,7 @@ export function PlaySoundButton({ text, url, flavor, onPlay } : { text, url, fla
     return <button onClick={togglePlayback}>
         <audio src={url} ref={audioRef}/>
         <img src={"static/speaker.png"} alt={"Speaker icon"} />
-        <p>{text}</p>
+        <cite>{text}</cite>
         <style jsx>{`
 button {
   cursor: pointer;
@@ -59,8 +59,9 @@ button:active img {
   transform: translateY(0.1em) rotate(3deg);
 }
 
-p {
+cite {
   position: absolute;
+  font-style: normal;
   font-weight: 500;
   display: inline-block;
   background-color: ${backgroundColor};
@@ -76,7 +77,7 @@ p {
   z-index: 1;
 }
 
-button:hover p {
+button:hover cite {
   padding: .2em .5em .2em 1.2em;
   max-width: 300px;
 }`}</style>
