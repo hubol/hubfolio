@@ -150,10 +150,14 @@ function doGameLogic(drummer: Drummer)
 
     drummer.frame = (drummer.frame + 0.1) % 2;
     drummer.x += drummer.dx;
-    if (drummer.x >= xMax)
-        drummer.dx = Math.abs(drummer.dx) * -1;
-    else if (drummer.x < xMin)
-        drummer.dx = Math.abs(drummer.dx);
+    if (drummer.dy === 0)
+    {
+        if (drummer.x >= xMax)
+            drummer.dx = Math.abs(drummer.dx) * -1;
+        else if (drummer.x < xMin)
+            drummer.dx = Math.abs(drummer.dx);
+    }
+
     if (drummer.dx !== 0)
         drummer.xScale = Math.sign(drummer.dx);
     drummer.dy = Math.min(12, drummer.dy + 1);
