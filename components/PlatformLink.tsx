@@ -24,6 +24,7 @@ a {
   border-radius: 999px;
   transition: filter .2s, box-shadow .2s, transform .2s;
   cursor: pointer;
+  user-select: none;
 }
 
 a:hover {

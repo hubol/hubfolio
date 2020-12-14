@@ -23,6 +23,7 @@ img {
   z-index: -4;
   left: 10vw;
   transform: translate(0, -24px);
+  user-select: none;
 }
 
 @media only screen and (max-width: 440px) {
