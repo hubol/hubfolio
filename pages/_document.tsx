@@ -11,8 +11,8 @@ export default class MyDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
                     <meta name="twitter:creator" content="@hubol" />
                     <meta name="twitter:card" content="summary" />
-                    <meta name="twitter:image" content="https://github.com/hubol/hubfolio/raw/feature/more-simple-page/twitter-card-image.png" />
-                    <meta name="og:image" content="https://github.com/hubol/hubfolio/raw/feature/more-simple-page/opengraph-image.png" />
+                    <meta name="twitter:image" content="https://github.com/hubol/hubfolio/raw/main/twitter-card-image.png" />
+                    <meta name="og:image" content="https://github.com/hubol/hubfolio/raw/main/opengraph-image.png" />
                 </Head>
                 <body>
                     <Main />
