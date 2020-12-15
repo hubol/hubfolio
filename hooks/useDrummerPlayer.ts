@@ -92,14 +92,14 @@ function enrichDrummerPointerBehavior(drummer: Drummer)
         cleanup();
     }
 
-    drummer.canvas.onpointerdown = e => {
+    drummer.canvas.onmousedown = e => {
         e.preventDefault();
         pointerMotion = 0;
-        document.addEventListener("pointermove", onPointerMoved);
-        document.addEventListener("pointerup", onPointerUp);
+        document.addEventListener("mousemove", onPointerMoved);
+        document.addEventListener("mouseup", onPointerUp);
         cleanup = () => {
-            document.removeEventListener("pointermove", onPointerMoved);
-            document.removeEventListener("pointerup", onPointerUp);
+            document.removeEventListener("mousemove", onPointerMoved);
+            document.removeEventListener("mouseup", onPointerUp);
         };
     };
 }
