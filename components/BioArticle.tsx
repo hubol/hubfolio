@@ -5,11 +5,12 @@ export function BioArticle()
 {
     return <article>
         <section>
-            <h2>You wanna know the real me?<PlaySoundButton text={"\"Hello Worst\""} url={"static/hello-worst-sample.mp3"} flavor={"dark"}/></h2>
-            <p>Much of my youth was spent in front of a computer screen. When my family got internet access, my CD-ROM collection was abandoned and I began playing freeware independent games. One such game was so exciting and inspirational to me that I reached out to its creator, Oddwarg. We soon developed a relationship where I would pester him for advice and code samples and he would deliver in a week or so. Through this mentorship and by leveraging a decompiler, I learned how to create computer games.</p>
+            <h2>Huh?!<PlaySoundButton text={"\"Underground\""} url={"static/underground-sample.mp3"} flavor={"dark"}/></h2>
+            <p>Much of my youth was spent in front of a computer screen. When my family got internet access, my CD-ROM collection was abandoned and I began playing freeware independent games. One such game was so exciting and inspirational to me that I reached out to its creator, Oddwarg. We soon developed a relationship where I would pester him for advice and code samples. Through this mentorship and by leveraging a decompiler, I learned how to create computer games.</p>
             <p>Despite inadequate tooling and a lack of basic computer skills, my teenage years were some of my most prolific: I was able to produce complete games in a matter of days, or even hours! I also embarked on more ambitious game projects, including two large exploration platformer games and a minigame collection.</p>
-            <p>Since then, my output has slowed substantially. After receiving my bachelor's in computer science, I began working at a healthcare software startup. There I formed a strong appreciation for modern web technologies. But my brain was exhausted by the job and I had to move on.</p>
-            <p>Now I am a college instructor, encouraging learners to explore software development to realize their creative goals.</p>
+            <p>After receiving my bachelor's in computer science, I began working at a healthcare software startup. While my personal output slowed, I at least met some inspired people and formed a strong appreciation for modern web technologies.</p>
+            <p>I went on to teach computer science as a college instructor for a while. That was really cool. After teaching, I went back to the software industry. This time, I felt like I was putting in significantly more than I was getting out.</p>
+            <p>But now I work at a very fun place. And more importantly, I'm creating more computer games!</p>
         </section>
         <style jsx>{`
 h2 {
